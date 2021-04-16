@@ -78,6 +78,7 @@ function trackProductViewAndProductCart() {
 }
 
 function mainProcedure() {
+    document.getElementById('rey-site-preloader').style.display = 'none';
     let currentUrl = getCurrentUrl()
     if (currentUrl === 'https://homeone.gr') {
         fbq('track', 'ViewContent', { content_name: 'Homepage' });
