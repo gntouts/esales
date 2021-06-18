@@ -142,7 +142,21 @@ function mainProcedure() {
             content_type: 'product', content_ids: contentIds,
             contents: contents, num_items: numItems, value: totalValue, currency: "EUR"
         };
+        let my_url = window.location.href.toString();
+        let store_pref = my_url.split('//')[1].split('.')[0].substring(0, 2);
+        let order_id_g = my_url.split('order-received/')[1].split('/')[0];
+        if (order_id_g) {
+            let transaction_id = store_pref + order_id_g;
+        } else {
+            let transaction_id = '';
+        }
         fbq('track', 'Purchase', params);
+        gtag('event', 'conversion', {
+            'send_to': 'AW-617519608/TCN3CNKtj-QBEPizuqYC',
+            'value': totalValue,
+            'currency': 'EUR',
+            'transaction_id': transaction_id
+        });
         setCookie('fromCheckout', 'no', 1);
 
     } else if (currentUrl.includes('/order-received/')) {
